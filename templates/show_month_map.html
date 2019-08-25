@@ -1,0 +1,70 @@
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+<style> 
+.column {
+  float: left;
+  width: 49.00%;
+  padding: 1px;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+
+<html>
+	<form action="/" method="POST">	
+		<input type="submit" value="Home Page"><br>
+	</form>
+<div class="row">
+<div class="column" id="bargraph">
+    <script>
+        var graphs = {{plot | safe}};
+	//var month = {{month | safe }};
+	//var year = {{year | safe}};
+	//String title_actual=String.format("Sentiment By Team %s/%s",month,year)
+	
+	//var title= {{title}};
+	
+	var layout = {
+		title: "Sentiment By Team",
+                        height:500,
+                        width:600,
+                        geo: {
+                                scope:"usa",
+                                showrivers:true,
+                                showlakes:true,
+                                showland:true
+                        }
+                        
+                     }
+        Plotly.plot('bargraph',graphs,layout);
+    </script>
+</div>
+
+
+<div class="column" id="table">
+	<script>
+	   var table= {{table | safe}};
+	   var layout = {
+	   	height:500,
+		width:600
+	   }
+	   Plotly.plot('table',table,{});
+	</script>
+</div>
+
+</div>
+
+<form action="http://localhost:5000/see_month_map" method="POST">
+        Month<br>
+        <input type="text" name="month">
+        <br>
+        Year<br>
+        <input type="text" name="year">
+        <br><br>
+        <input type="submit" value="Go to month">
+</form>
+</html>

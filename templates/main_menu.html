@@ -1,0 +1,28 @@
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/file_style.css') }}">   
+<style>
+html { 
+  background: url("/static/john_gruden.jpeg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover; 
+  -o-background-size: cover;
+  background-size: cover; 
+} 
+.buttonHolder{ text-align: center; }
+
+</style> 
+
+<html>
+<body>
+<form action = "http://localhost:5000/see_map" method="POST">
+	<div class="buttonHolder">
+	<input type="submit" name = "See the Map" class="see_map" value="See the Map"/>
+	</div>
+</form>
+
+<form action = "http://localhost:5000/generate_text" method="POST">
+	<div class="buttonHolder">
+	<input type="submit" name = "See what the bot is saying" class="generate_text" value="See what the bot is saying"/>
+	</div>
+</form>
+</body>
+</html>
