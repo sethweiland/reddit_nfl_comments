@@ -42,9 +42,11 @@ for endpoint in endpoints[10:]:
     os.system(f"mongoimport --db reddit_comments_sports --collection All_Data --type json --file holder_file") 
     client = MongoClient()
     print("Succesfully wrote to db")
-    #db = client.reddit_comments_sports
-    #db.All_Data.delete_many({'subreddit':filter_reg_ex})
-    #db.command({"compact":'All_Data'})  
+    db = client.reddit_comments_sports
+    #only because grep will include all reddit comments with metadata that includes name of subreddits we want
+    db.All_Data.delete_many({'subreddit':filter_reg_ex})
+    #release the memory of deleted mongoDB back to OS
+    db.command({"compact":'All_Data'})  
     #remove the unzipped file after we have written to the mongodb
     os.system(f"rm {file_name}")
     os.system(f"rm holder_file")
